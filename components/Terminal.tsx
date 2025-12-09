@@ -13,13 +13,23 @@ export default function Terminal() {
       className="w-full max-w-4xl bg-terminal-bg rounded-lg shadow-2xl overflow-hidden relative"
     >
       {/* Terminal Header */}
-      <div className="bg-[#2d2d2d] px-4 py-3 flex items-center gap-4">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-          <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-          <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+      <div className="bg-[#2d2d2d] px-4 py-3 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <div className="flex gap-2">
+            <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+            <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+          </div>
+          <div className="text-[#c0c0c0] text-sm hidden sm:block">yamlyeti@bergman.local:~</div>
         </div>
-        <div className="text-[#c0c0c0] text-sm">yamlyeti@bergman.local:~</div>
+
+        {/* Navigation Menu */}
+        <nav className="flex items-center gap-4 text-sm">
+          <Link href="/" className="text-[#c0c0c0] hover:text-white transition-colors">Home</Link>
+          <Link href="/projects" className="text-[#c0c0c0] hover:text-white transition-colors">Projects</Link>
+          <Link href="/resume" className="text-[#c0c0c0] hover:text-white transition-colors">Resume</Link>
+          <Link href="/skills" className="text-[#c0c0c0] hover:text-white transition-colors">Skills</Link>
+        </nav>
       </div>
 
       {/* Terminal Body */}

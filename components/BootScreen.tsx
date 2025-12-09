@@ -1,7 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
 
 const bootLines = [
   'BIOS v2.4.1 - bergman.rocks',
@@ -15,26 +15,63 @@ const bootLines = [
   'System ready. Welcome to bergman.rocks',
 ]
 
-export default function BootScreen() {
+interface BootScreenProps {
+  onComplete: () => void
+}
+
+export default function BootScreen({ onComplete }: BootScreenProps) {
   const [glitch, setGlitch] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
+  const bootTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const menuTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     // Trigger random intense glitches
     const triggerGlitch = () => {
       setGlitch(true)
-      // Glitch lasts between 100ms and 400ms
       const duration = Math.random() * 300 + 100
       setTimeout(() => setGlitch(false), duration)
 
-      // Schedule next glitch randomly between 2s and 5s
       const nextGlitch = Math.random() * 3000 + 2000
       setTimeout(triggerGlitch, nextGlitch)
     }
 
-    // Initial glitch shortly after start
-    const timer = setTimeout(triggerGlitch, 1000)
-    return () => clearTimeout(timer)
-  }, [])
+    const glitchTimer = setTimeout(triggerGlitch, 1000)
+
+    // Auto-complete logic
+    // Last line appears at: (bootLines.length - 1) * 0.3 + 0.2 + 0.9 (dots) ~= 3.5s
+    // Wait 2s after that = 5.5s total
+    bootTimerRef.current = setTimeout(() => {
+      onComplete()
+    }, 5500)
+
+    return () => {
+      clearTimeout(glitchTimer)
+      if (bootTimerRef.current) clearTimeout(bootTimerRef.current)
+      if (menuTimerRef.current) clearTimeout(menuTimerRef.current)
+    }
+  }, [onComplete])
+
+  // Key listener for menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === ':' || e.key === ';') { // Accept ; as well for convenience
+        if (!showMenu) {
+          setShowMenu(true)
+          // Cancel auto-boot
+          if (bootTimerRef.current) clearTimeout(bootTimerRef.current)
+
+          // Start menu timeout (3s)
+          menuTimerRef.current = setTimeout(() => {
+            onComplete()
+          }, 3000)
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [showMenu, onComplete])
 
   return (
     <motion.div
@@ -46,9 +83,8 @@ export default function BootScreen() {
       <div className="absolute inset-0 pointer-events-none z-10 opacity-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))]" style={{ backgroundSize: '100% 2px, 3px 100%' }} />
 
       {/* Glitch Container */}
-      <div className={`relative max-w-2xl px-5 ${glitch ? 'glitch-active' : ''}`}>
+      <div className={`relative max-w-2xl px-5 w-full ${glitch ? 'glitch-active' : ''}`}>
 
-        {/* CSS for Glitch Animation */}
         <style jsx>{`
           .glitch-active {
             position: relative;
@@ -56,7 +92,7 @@ export default function BootScreen() {
           }
           .glitch-active::before,
           .glitch-active::after {
-            content: attr(data-text); /* This won't work on the container directly, using separate layers */
+            content: attr(data-text);
             position: absolute;
             top: 0;
             left: 0;
@@ -105,7 +141,7 @@ export default function BootScreen() {
           }
         `}</style>
 
-        {/* Glitch Layers - Duplicating content for the RGB split effect */}
+        {/* Glitch Layers */}
         {glitch && (
           <>
             <div className="absolute inset-0 text-[#ff00ff] opacity-70 translate-x-[-4px] animate-[glitch-anim-1_0.3s_infinite_linear_alternate-reverse] pointer-events-none mix-blend-screen z-0">
@@ -123,62 +159,98 @@ export default function BootScreen() {
 
         {/* Main Content */}
         <div className="relative z-10">
-          {bootLines.map((line, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: i * 0.3 + 0.2, duration: 0.3 }}
-              className={`text-sm mb-2 ${i === bootLines.length - 1 ? 'text-terminal-cyan text-base mt-5' : 'text-terminal-green'
-                }`}
-            >
-              {line.includes('[OK]') ? (
-                <>
-                  {line.split('[OK]')[0]}
-                  <span className="text-[#27c93f] font-bold">[OK]</span>
-                </>
-              ) : (
-                <>
-                  {line}
-                  {i === bootLines.length - 1 && (
-                    <>
-                      <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3, duration: 0.3 }}
-                      >
-                        .
-                      </motion.span>
-                      <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6, duration: 0.3 }}
-                      >
-                        .
-                      </motion.span>
-                      <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.9, duration: 0.3 }}
-                      >
-                        .
-                      </motion.span>
-                    </>
-                  )}
-                </>
-              )}
-            </motion.div>
-          ))}
+          <AnimatePresence mode="wait">
+            {!showMenu ? (
+              <motion.div
+                key="boot-text"
+                exit={{ opacity: 0, filter: 'blur(10px)' }}
+                transition={{ duration: 0.2 }}
+              >
+                {bootLines.map((line, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: i * 0.3 + 0.2, duration: 0.3 }}
+                    className={`text-sm mb-2 ${i === bootLines.length - 1 ? 'text-terminal-cyan text-base mt-5' : 'text-terminal-green'
+                      }`}
+                  >
+                    {line.includes('[OK]') ? (
+                      <>
+                        {line.split('[OK]')[0]}
+                        <span className="text-[#27c93f] font-bold">[OK]</span>
+                      </>
+                    ) : (
+                      <>
+                        {line}
+                        {i === bootLines.length - 1 && (
+                          <>
+                            <motion.span
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.3, duration: 0.3 }}
+                            >
+                              .
+                            </motion.span>
+                            <motion.span
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.6, duration: 0.3 }}
+                            >
+                              .
+                            </motion.span>
+                            <motion.span
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.9, duration: 0.3 }}
+                            >
+                              .
+                            </motion.span>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </motion.div>
+                ))}
 
-          {/* Help prompt */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 3.5, duration: 0.5 }}
-            className="text-sm text-[#c0c0c0] mt-4"
-          >
-            Press <span className="text-terminal-cyan font-bold">:</span> for help
-          </motion.div>
+                {/* Help prompt */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 3.5, duration: 0.5 }}
+                  className="text-sm text-[#c0c0c0] mt-4"
+                >
+                  Press <span className="text-terminal-cyan font-bold">:</span> for help
+                </motion.div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.1 }}
+                className="border-2 border-terminal-cyan p-5 bg-black/90 shadow-[0_0_20px_rgba(0,255,255,0.3)]"
+              >
+                <h2 className="text-terminal-cyan text-xl mb-4 font-bold border-b border-terminal-cyan pb-2">
+                  SYSTEM RECOVERY MENU
+                </h2>
+                <ul className="space-y-2 text-terminal-green">
+                  <li className="hover:bg-terminal-cyan/20 p-1 cursor-pointer transition-colors" onClick={onComplete}>
+                    1. Normal Boot
+                  </li>
+                  <li className="hover:bg-terminal-cyan/20 p-1 cursor-pointer transition-colors opacity-50">
+                    2. Safe Mode (Disabled)
+                  </li>
+                  <li className="hover:bg-terminal-cyan/20 p-1 cursor-pointer transition-colors opacity-50">
+                    3. Memory Test (Disabled)
+                  </li>
+                </ul>
+                <div className="mt-4 text-xs text-[#c0c0c0] animate-pulse">
+                  Auto-booting in 3 seconds...
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </motion.div>

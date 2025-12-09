@@ -10,19 +10,20 @@ import CommandMode from '@/components/CommandMode'
 export default function Home() {
   const [booting, setBooting] = useState(true)
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setBooting(false)
-    }, 5500) // Extended to 5.5 seconds - boot completes at ~3s, then holds for 2.5s
-    return () => clearTimeout(timer)
-  }, [])
+  // Boot logic moved to BootScreen component
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setBooting(false)
+  //   }, 5500)
+  //   return () => clearTimeout(timer)
+  // }, [])
 
   return (
     <>
       <main className="min-h-screen flex items-center justify-center p-5">
         <AnimatePresence mode="wait">
           {booting ? (
-            <BootScreen key="boot" />
+            <BootScreen key="boot" onComplete={() => setBooting(false)} />
           ) : (
             <Terminal key="terminal" />
           )}
