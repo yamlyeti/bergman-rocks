@@ -20,7 +20,8 @@
     "next": "^16.0.7",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "react-parallax-tilt": "^1.7.315"
+    "react-parallax-tilt": "^1.7.315",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.17",

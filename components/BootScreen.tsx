@@ -29,14 +29,16 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
     // Trigger random intense glitches
     const triggerGlitch = () => {
       setGlitch(true)
-      const duration = Math.random() * 300 + 100
+      // Longer duration: 200ms - 800ms
+      const duration = Math.random() * 600 + 200
       setTimeout(() => setGlitch(false), duration)
 
-      const nextGlitch = Math.random() * 3000 + 2000
+      // More frequent: 500ms - 1500ms
+      const nextGlitch = Math.random() * 1000 + 500
       setTimeout(triggerGlitch, nextGlitch)
     }
 
-    const glitchTimer = setTimeout(triggerGlitch, 1000)
+    const glitchTimer = setTimeout(triggerGlitch, 500)
 
     // Auto-complete logic
     // Last line appears at: (bootLines.length - 1) * 0.3 + 0.2 + 0.9 (dots) ~= 3.5s
@@ -104,14 +106,14 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
             color: #ff00ff;
             animation: glitch-anim-1 2s infinite linear alternate-reverse;
             clip-path: inset(0 0 0 0);
-            transform: translate(-4px, -2px);
+            transform: translate(-10px, -5px);
             z-index: -1;
           }
           .glitch-active::after {
             color: #00ffff;
             animation: glitch-anim-2 2s infinite linear alternate-reverse;
             clip-path: inset(0 0 0 0);
-            transform: translate(4px, 2px);
+            transform: translate(10px, 5px);
             z-index: -2;
           }
 
@@ -132,12 +134,12 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
             100% { clip-path: inset(5% 0 80% 0); }
           }
           @keyframes glitch-skew {
-            0% { transform: skew(0deg); }
-            20% { transform: skew(-2deg); }
-            40% { transform: skew(2deg); }
-            60% { transform: skew(-1deg); }
-            80% { transform: skew(1deg); }
-            100% { transform: skew(0deg); }
+            0% { transform: skew(0deg) scale(1); }
+            20% { transform: skew(-10deg) scale(1.05); }
+            40% { transform: skew(10deg) scale(0.95); }
+            60% { transform: skew(-5deg) scale(1.02); }
+            80% { transform: skew(5deg) scale(0.98); }
+            100% { transform: skew(0deg) scale(1); }
           }
         `}</style>
 
