@@ -1,13 +1,36 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTheme } from './ThemeProvider'
 
 export default function CommandMode() {
   const [commandMode, setCommandMode] = useState(false)
   const [command, setCommand] = useState('')
   const [showHelp, setShowHelp] = useState(false)
   const router = useRouter()
+  const { setTheme } = useTheme()
+  const idleTimerRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Auto-help timer logic
+  useEffect(() => {
+    if (commandMode && !showHelp) {
+      // Clear existing timer
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
+
+      // Set new timer
+      idleTimerRef.current = setTimeout(() => {
+        if (command.length === 0) { // Only show if user hasn't typed anything
+          setShowHelp(true)
+          setCommandMode(false)
+        }
+      }, 3000)
+    }
+
+    return () => {
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
+    }
+  }, [commandMode, showHelp, command])
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -43,6 +66,10 @@ export default function CommandMode() {
           router.push('/skills')
         } else if (command === 'projects') {
           router.push('/projects')
+        } else if (command === 'dark') {
+          setTheme('dark')
+        } else if (command === 'light') {
+          setTheme('light')
         } else if (command === 'q!') {
           // Close command mode
         }
@@ -53,7 +80,7 @@ export default function CommandMode() {
 
     window.addEventListener('keydown', handleKeyPress)
     return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [commandMode, command, showHelp, router])
+  }, [commandMode, command, showHelp, router, setTheme])
 
   return (
     <>
@@ -66,7 +93,7 @@ export default function CommandMode() {
               <span className="text-[#c0c0c0] text-sm font-mono">:help</span>
               <span className="text-[#808080] text-xs">Press ESC to close</span>
             </div>
-            
+
             {/* Help Content */}
             <div className="p-6 font-mono text-sm text-[#c0c0c0] max-h-[70vh] overflow-y-auto">
               <div className="mb-4">
@@ -98,6 +125,14 @@ export default function CommandMode() {
                 <div className="flex">
                   <span className="text-terminal-yellow w-32">:projects</span>
                   <span className="text-[#c0c0c0]">View projects page</span>
+                </div>
+                <div className="flex">
+                  <span className="text-terminal-yellow w-32">:dark</span>
+                  <span className="text-[#c0c0c0]">Switch to Dark Mode</span>
+                </div>
+                <div className="flex">
+                  <span className="text-terminal-yellow w-32">:light</span>
+                  <span className="text-[#c0c0c0]">Switch to Light Mode</span>
                 </div>
                 <div className="flex">
                   <span className="text-terminal-yellow w-32">:github</span>

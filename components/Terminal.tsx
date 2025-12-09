@@ -3,36 +3,11 @@
 import { motion } from 'framer-motion'
 import MountainHero from './MountainHero'
 import Link from 'next/link'
+import TerminalWrapper from './TerminalWrapper'
 
 export default function Terminal() {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="w-full max-w-4xl bg-terminal-bg rounded-lg shadow-2xl overflow-hidden relative"
-    >
-      {/* Terminal Header */}
-      <div className="bg-[#2d2d2d] px-4 py-3 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="flex gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-            <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
-          </div>
-          <div className="text-[#c0c0c0] text-sm hidden sm:block">yamlyeti@bergman.local:~</div>
-        </div>
-
-        {/* Navigation Menu */}
-        <nav className="flex items-center gap-4 text-sm">
-          <Link href="/" className="text-[#c0c0c0] hover:text-white transition-colors">Home</Link>
-          <Link href="/projects" className="text-[#c0c0c0] hover:text-white transition-colors">Projects</Link>
-          <Link href="/resume" className="text-[#c0c0c0] hover:text-white transition-colors">Resume</Link>
-          <Link href="/skills" className="text-[#c0c0c0] hover:text-white transition-colors">Skills</Link>
-        </nav>
-      </div>
-
-      {/* Terminal Body */}
+    <TerminalWrapper>
       <div className="p-8 pb-0">
         <MountainHero />
 
@@ -45,13 +20,13 @@ export default function Terminal() {
         >
           {/* About */}
           <div>
-            <p className="text-terminal-green mb-2">
-              <span className="text-terminal-cyan">$</span>{' '}
-              <Link href="/resume" className="text-terminal-cyan hover:text-terminal-green transition-colors">
+            <p className="text-[#a6e3a1] mb-2">
+              <span className="text-[#89b4fa]">$</span>{' '}
+              <Link href="/resume" className="text-[#89b4fa] hover:text-[#a6e3a1] transition-colors">
                 cat about.txt
               </Link>
             </p>
-            <div className="ml-5 text-[#c0c0c0] space-y-2">
+            <div className="ml-5 text-[#cdd6f4] space-y-2">
               <p>Hey, I'm Bergman (yamlyeti). I live in the terminal and neovim, automating infrastructure and making deployments rock solid.</p>
               <p>When I'm not wrangling Kubernetes clusters or writing YAML, you'll find me scaling mountains—both literal and metaphorical.</p>
             </div>
@@ -59,9 +34,9 @@ export default function Terminal() {
 
           {/* Skills */}
           <div>
-            <p className="text-terminal-green mb-2">
-              <span className="text-terminal-cyan">$</span>{' '}
-              <Link href="/skills" className="text-terminal-cyan hover:text-terminal-green transition-colors">
+            <p className="text-[#a6e3a1] mb-2">
+              <span className="text-[#89b4fa]">$</span>{' '}
+              <Link href="/skills" className="text-[#89b4fa] hover:text-[#a6e3a1] transition-colors">
                 ls -la skills/
               </Link>
             </p>
@@ -78,7 +53,7 @@ export default function Terminal() {
               ].map((skill) => (
                 <div
                   key={skill}
-                  className="bg-[#1a1a1a] p-3 border-l-2 border-terminal-cyan text-[#c0c0c0]"
+                  className="bg-[#181825] p-3 border-l-2 border-[#89b4fa] text-[#cdd6f4]"
                 >
                   {skill}
                 </div>
@@ -88,10 +63,10 @@ export default function Terminal() {
 
           {/* Contact */}
           <div>
-            <p className="text-terminal-green mb-2">
-              <span className="text-terminal-cyan">$</span> cat contact.sh
+            <p className="text-[#a6e3a1] mb-2">
+              <span className="text-[#89b4fa]">$</span> cat contact.sh
             </p>
-            <div className="ml-5 text-[#c0c0c0] space-y-1">
+            <div className="ml-5 text-[#cdd6f4] space-y-1">
               <p>#!/bin/bash</p>
               <p>
                 echo "Find me on GitHub:{' '}
@@ -99,7 +74,7 @@ export default function Terminal() {
                   href="https://github.com/yamlyeti"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-terminal-cyan border-b border-dotted border-terminal-cyan hover:text-terminal-green hover:border-terminal-green transition-colors"
+                  className="text-[#89b4fa] border-b border-dotted border-[#89b4fa] hover:text-[#a6e3a1] hover:border-[#a6e3a1] transition-colors"
                 >
                   @yamlyeti
                 </a>
@@ -111,15 +86,13 @@ export default function Terminal() {
 
           {/* Cursor */}
           <div>
-            <p className="text-terminal-green">
-              <span className="text-terminal-cyan">$</span>{' '}
+            <p className="text-[#a6e3a1]">
+              <span className="text-[#89b4fa]">$</span>{' '}
               <span className="animate-pulse">█</span>
             </p>
           </div>
         </motion.div>
       </div>
-
-
-    </motion.div>
+    </TerminalWrapper>
   )
 }
