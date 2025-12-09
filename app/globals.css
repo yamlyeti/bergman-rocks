@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-terminal-bg: #0a0a0a;
+  --color-terminal-green: #00ff00;
+  --color-terminal-cyan: #00d9ff;
+  --color-terminal-yellow: #ffbd2e;
+}
+
+body {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: var(--color-terminal-green);
+  font-family: 'Courier New', monospace;
+}
