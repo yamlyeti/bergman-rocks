@@ -141,7 +141,7 @@ export default function MountainHero() {
           {/* Embossed Text "bergman.rocks" */}
           <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
             <motion.div
-              className="flex space-x-2"
+              className="flex space-x-2 mt-32"
               initial="hidden"
               animate="visible"
               variants={{
@@ -164,7 +164,7 @@ export default function MountainHero() {
                   }}
                   className="text-5xl md:text-7xl font-black text-[#bae6fd] uppercase tracking-widest select-none"
                   style={{
-                    textShadow: '-2px -2px 2px rgba(255,255,255,0.9), 2px 2px 4px rgba(0,0,0,0.3), 0px 0px 10px rgba(255,255,255,0.5)'
+                    textShadow: '-3px -3px 2px rgba(255,255,255,0.9), 3px 3px 2px rgba(0,0,0,0.4), 0px 0px 15px rgba(255,255,255,0.6)'
                   }}
                 >
                   {char}
