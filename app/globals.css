@@ -58,3 +58,19 @@ body {
   transition-duration: 0.5s;
   transition-timing-function: ease;
 }
+
+/* Shake animation for invalid command feedback */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(-6px); }
+  20% { transform: translateX(6px); }
+  30% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  50% { transform: translateX(-2px); }
+  60% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.65s ease-in-out;
+}

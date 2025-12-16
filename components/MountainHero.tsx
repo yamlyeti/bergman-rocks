@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useRef, useMemo } from 'react'
+import { useTheme } from './ThemeProvider'
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import Particles, { initParticlesEngine } from '@tsparticles/react'
 import { loadSlim } from '@tsparticles/slim'
@@ -92,6 +93,8 @@ export default function MountainHero() {
     mouseY.set(0)
   }
 
+  const { snowMode } = useTheme()
+
   return (
     <div className="text-center mb-10">
       <div
@@ -101,7 +104,7 @@ export default function MountainHero() {
         className="relative h-[450px] mb-8 rounded-xl overflow-hidden bg-[#bae6fd] shadow-2xl group"
       >
         {/* Particles Snowfall */}
-        {init && (
+        {init && snowMode !== 'off' && (
           <Particles
             id="tsparticles"
             className="absolute inset-0 z-10 pointer-events-none"
@@ -110,11 +113,11 @@ export default function MountainHero() {
               interactivity: { events: { onHover: { enable: true, mode: "repulse" } } },
               particles: {
                 color: { value: "#ffffff" },
-                move: { enable: true, speed: 2, direction: "bottom" },
-                number: { value: 100 },
-                opacity: { value: 0.6 },
-                size: { value: { min: 1, max: 3 } },
-                wobble: { enable: true, distance: 10, speed: 10 }
+                move: { enable: true, speed: snowMode === 'blizzard' ? 5 : 2, direction: "bottom", straight: false },
+                number: { value: snowMode === 'blizzard' ? 250 : 100 },
+                opacity: { value: snowMode === 'blizzard' ? 0.9 : 0.6 },
+                size: { value: { min: snowMode === 'blizzard' ? 1.5 : 1, max: snowMode === 'blizzard' ? 4 : 3 } },
+                wobble: { enable: snowMode === 'blizzard', distance: snowMode === 'blizzard' ? 30 : 10, speed: snowMode === 'blizzard' ? 20 : 10 }
               },
             }}
           />

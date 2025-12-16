@@ -9,8 +9,9 @@ export default function CommandMode() {
   const [command, setCommand] = useState('')
   const [showHelp, setShowHelp] = useState(false)
   const router = useRouter()
-  const { setTheme } = useTheme()
+  const { setTheme, setSnowMode } = useTheme()
   const idleTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const [invalidCommand, setInvalidCommand] = useState<string | null>(null)
 
   // Auto-help timer logic
   useEffect(() => {
@@ -46,41 +47,97 @@ export default function CommandMode() {
         }
       } else if (e.key === 'Enter' && commandMode) {
         // Handle command execution
+        let handled = false
         if (command === 'help' || command === 'h') {
           setShowHelp(true)
-          setCommandMode(false)
-          setCommand('')
-          return
+          handled = true
         } else if (command === 'github') {
           window.open('https://github.com/yamlyeti', '_blank')
+          handled = true
+        } else if (command === 'contact' || command === 'contactme') {
+          window.open('https://n8n.srv1123629.hstgr.cloud/form/20e51a6a-4034-4aa3-af61-fcf0200fd404', '_blank')
+          handled = true
+        } else if (command === 'snow-on') {
+          setSnowMode('normal')
+          handled = true
+        } else if (command === 'snow-off') {
+          setSnowMode('off')
+          handled = true
+        } else if (command === 'blizzard') {
+          setSnowMode('blizzard')
+          handled = true
         } else if (command === 'email') {
           // TODO: Add mailto link
           alert('Email functionality coming soon!')
+          handled = true
         } else if (command === 'home') {
           router.push('/')
+          handled = true
         } else if (command === 'boot') {
           window.location.href = '/'
+          handled = true
         } else if (command === 'resume') {
           router.push('/resume')
+          handled = true
         } else if (command === 'skills') {
           router.push('/skills')
+          handled = true
         } else if (command === 'projects') {
           router.push('/projects')
+          handled = true
         } else if (command === 'dark') {
           setTheme('dark')
+          handled = true
         } else if (command === 'light') {
           setTheme('light')
+          handled = true
         } else if (command === 'q!') {
           // Close command mode
+          handled = true
         }
-        setCommandMode(false)
-        setCommand('')
+
+        if (!handled && command.trim().length > 0) {
+          // Unknown command: show error, vibrate, and play bell but keep command mode open
+          const bad = command
+          setInvalidCommand(bad)
+          // play terminal bell sound
+          try {
+            const Ctx = (window.AudioContext || (window as any).webkitAudioContext)
+            const ctx = new Ctx()
+            const o = ctx.createOscillator()
+            const g = ctx.createGain()
+            o.type = 'sine'
+            o.frequency.value = 800
+            o.connect(g)
+            g.connect(ctx.destination)
+            g.gain.value = 0.00001
+            o.start()
+            g.gain.exponentialRampToValueAtTime(0.05, ctx.currentTime + 0.01)
+            g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.25)
+            setTimeout(() => {
+              try { o.stop(); ctx.close() } catch (_) {}
+            }, 300)
+          } catch (e) {
+            // ignore audio errors
+          }
+          // clear after a short animation
+          setTimeout(() => setInvalidCommand(null), 900)
+        }
+
+        if (handled) {
+          setCommandMode(false)
+          setCommand('')
+        }
+        if (command === 'help' || command === 'h') {
+          // help handled earlier; make sure input cleared
+          setCommand('')
+        }
       }
     }
 
     window.addEventListener('keydown', handleKeyPress)
     return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [commandMode, command, showHelp, router, setTheme])
+  }, [commandMode, command, showHelp, router, setTheme, setSnowMode])
 
   return (
     <>
@@ -139,6 +196,22 @@ export default function CommandMode() {
                   <span className="text-[#c0c0c0]">Open GitHub profile</span>
                 </div>
                 <div className="flex">
+                  <span className="text-terminal-yellow w-32">:contact</span>
+                  <span className="text-[#c0c0c0]">Open contact form</span>
+                </div>
+                <div className="flex">
+                  <span className="text-terminal-yellow w-32">:snow-on</span>
+                  <span className="text-[#c0c0c0]">Enable normal snow</span>
+                </div>
+                <div className="flex">
+                  <span className="text-terminal-yellow w-32">:snow-off</span>
+                  <span className="text-[#c0c0c0]">Disable snow particles</span>
+                </div>
+                <div className="flex">
+                  <span className="text-terminal-yellow w-32">:blizzard</span>
+                  <span className="text-[#c0c0c0]">Enable fast blizzard snowfall</span>
+                </div>
+                <div className="flex">
                   <span className="text-terminal-yellow w-32">:email</span>
                   <span className="text-[#c0c0c0]">Send email (coming soon)</span>
                 </div>
@@ -167,16 +240,19 @@ export default function CommandMode() {
       {/* Command Line */}
       {commandMode && (
         <div className="fixed bottom-12 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 z-50">
-          <div className="bg-[#1e1e1e] border border-[#3a3a3a] rounded px-4 py-2 text-sm font-mono shadow-lg mx-4">
+          <div className={`bg-[#1e1e1e] border border-[#3a3a3a] rounded px-4 py-2 text-sm font-mono shadow-lg mx-4 ${invalidCommand ? 'shake border-red-600' : ''}`}>
             <span className="text-terminal-cyan">:</span>
             <input
               type="text"
               value={command}
               onChange={(e) => setCommand(e.target.value)}
               autoFocus
-              className="bg-transparent text-terminal-green outline-none ml-1 flex-1 w-[calc(100%-20px)]"
+              className={`bg-transparent outline-none ml-1 flex-1 w-[calc(100%-20px)] ${invalidCommand ? 'text-red-400' : 'text-terminal-green'}`}
               placeholder="help"
             />
+            {invalidCommand && (
+              <span className="ml-2 text-red-400 font-mono text-xs">🔔 {invalidCommand}</span>
+            )}
           </div>
         </div>
       )}
