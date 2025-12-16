@@ -101,8 +101,30 @@ export default function Terminal() {
                 </a>
                 "
               </p>
-              <p>echo "This domain: bergman.rocks"</p>
-              <p>echo "Also this domain: https://joshbergman.io"</p>
+              <p>
+                echo "This domain:{' '}
+                <a
+                  href="https://dev.bergman.rocks"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#89b4fa] border-b border-dotted border-[#89b4fa] hover:text-[#a6e3a1] hover:border-[#a6e3a1] transition-colors"
+                >
+                  bergman.rocks
+                </a>
+                "
+              </p>
+              <p>
+                echo "Also this domain:{' '}
+                <a
+                  href="https://joshbergman.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#89b4fa] border-b border-dotted border-[#89b4fa] hover:text-[#a6e3a1] hover:border-[#a6e3a1] transition-colors"
+                >
+                  joshbergman.io
+                </a>
+                "
+              </p>
               <p>
                 echo "Contact me:{' '}
                 <a
