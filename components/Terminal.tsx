@@ -27,8 +27,8 @@ export default function Terminal() {
               </Link>
             </p>
             <div className="ml-5 text-[#cdd6f4] space-y-2">
-              <p>Hey, I'm Bergman (yamlyeti). I live in the terminal and neovim, automating infrastructure and making deployments rock solid.</p>
-              <p>When I'm not wrangling Kubernetes clusters or writing YAML, you'll find me scaling mountains—both literal and metaphorical.</p>
+              <p>Hey, I'm Josh. I live in the terminal and neovim, automating infrastructure and making deployments rock solid.</p>
+              <p>When I'm not working on automating all the things, full stack orchestrating at its highest or writing YAML, you'll find me scaling mountains—both literal and metaphorical.</p>
             </div>
           </div>
 
@@ -69,7 +69,7 @@ export default function Terminal() {
             <div className="ml-5 text-[#cdd6f4] space-y-1">
               <p>#!/bin/bash</p>
               <p>
-                echo "Find me on GitHub:{' '}
+                echo "Personal GitHubs:{' '}
                 <a
                   href="https://github.com/yamlyeti"
                   target="_blank"
@@ -78,9 +78,43 @@ export default function Terminal() {
                 >
                   @yamlyeti
                 </a>
+                " and "
+                <a
+                  href="https://github.com/b3rgman"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#89b4fa] border-b border-dotted border-[#89b4fa] hover:text-[#a6e3a1] hover:border-[#a6e3a1] transition-colors"
+                >
+                  @b3rgman
+                </a>
+                "
+              </p>
+              <p>
+                echo "Professional GitHub:{' '}
+                <a
+                  href="https://github.com/jbergman-oddball"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#89b4fa] border-b border-dotted border-[#89b4fa] hover:text-[#a6e3a1] hover:border-[#a6e3a1] transition-colors"
+                >
+                  @jbergman-oddball
+                </a>
                 "
               </p>
               <p>echo "This domain: bergman.rocks"</p>
+              <p>echo "Also this domain: https://joshbergman.io"</p>
+              <p>
+                echo "Contact me:{' '}
+                <a
+                  href="https://n8n.srv1123629.hstgr.cloud/form/20e51a6a-4034-4aa3-af61-fcf0200fd404"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#89b4fa] border-b border-dotted border-[#89b4fa] hover:text-[#a6e3a1] hover:border-[#a6e3a1] transition-colors"
+                >
+                  Contact me
+                </a>
+                "
+              </p>
             </div>
           </div>
 
