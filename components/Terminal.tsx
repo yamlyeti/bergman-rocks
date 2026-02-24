@@ -128,7 +128,7 @@ export default function Terminal() {
               <p>
                 echo "Contact me:{' '}
                 <a
-                  href="https://n8n.srv1123629.hstgr.cloud/form/20e51a6a-4034-4aa3-af61-fcf0200fd404"
+                  href="https://n8n.bergman.rocks/form/20e51a6a-4034-4aa3-af61-fcf0200fd404"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#89b4fa] border-b border-dotted border-[#89b4fa] hover:text-[#a6e3a1] hover:border-[#a6e3a1] transition-colors"

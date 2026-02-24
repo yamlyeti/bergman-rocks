@@ -55,7 +55,7 @@ export default function CommandMode() {
           window.open('https://github.com/yamlyeti', '_blank')
           handled = true
         } else if (command === 'contact' || command === 'contactme') {
-          window.open('https://n8n.srv1123629.hstgr.cloud/form/20e51a6a-4034-4aa3-af61-fcf0200fd404', '_blank')
+          window.open('https://n8n.bergman.rocks/form/20e51a6a-4034-4aa3-af61-fcf0200fd404', '_blank')
           handled = true
         } else if (command === 'snow-on') {
           setSnowMode('normal')
