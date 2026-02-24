@@ -22,7 +22,7 @@ export default function ProjectsPage() {
 
               <div className="space-y-4">
                 <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
-                  <h3 className="text-[#89b4fa] text-lg mb-2">bergman.rocks</h3>
+                  <h3 className="text-[#89b4fa] text-lg mb-2"><a href="https://dev.bergman.rocks" target="_blank" rel="noopener noreferrer" className="hover:text-[#a6e3a1] transition-colors">bergman.rocks</a></h3>
                   <p className="text-sm mb-2">Personal portfolio site with terminal-inspired design</p>
                   <div className="flex gap-2 text-xs">
                     <span className="bg-[#313244] px-2 py-1 rounded">Next.js</span>
@@ -30,7 +30,25 @@ export default function ProjectsPage() {
                     <span className="bg-[#313244] px-2 py-1 rounded">Tailwind</span>
                   </div>
                 </div>
-
+                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
+                  <h3 className="text-[#89b4fa] text-lg mb-2"><a href="https://ppoker.bergman.rocks" target="_blank" rel="noopener noreferrer" className="hover:text-[#a6e3a1] transition-colors">ppoker.bergman.rocks</a></h3>
+                  <p className="text-sm mb-2">Planning Poker. But fun</p>
+                  <div className="flex gap-2 text-xs">
+                    <span className="bg-[#313244] px-2 py-1 rounded">Node.js</span>
+                    <span className="bg-[#313244] px-2 py-1 rounded">Express</span>
+                    <span className="bg-[#313244] px-2 py-1 rounded">Socket.io</span>
+                  </div>
+                </div>
+                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
+                  <h3 className="text-[#89b4fa] text-lg mb-2"><a href="https://tk-dev.bergman.rocks" target="_blank" rel="noopener noreferrer" className="hover:text-[#a6e3a1] transition-colors">tk-dev.bergman.rocks</a></h3>
+                  <p className="text-sm mb-2">Time keeping system</p>
+                  <div className="flex gap-2 text-xs">
+                    <span className="bg-[#313244] px-2 py-1 rounded">React</span>
+                    <span className="bg-[#313244] px-2 py-1 rounded">TypeScript</span>
+                    <span className="bg-[#313244] px-2 py-1 rounded">Vite</span>
+                    <span className="bg-[#313244] px-2 py-1 rounded">Supabase</span>
+                  </div>
+                </div>
                 <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
                   <h3 className="text-[#89b4fa] text-lg mb-2">More projects coming soon...</h3>
                   <p className="text-sm">Check back later or visit my GitHub</p>
