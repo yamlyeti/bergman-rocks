@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-terminal-bg: #0a0a0a;
+  --color-terminal-green: #00ff00;
+  --color-terminal-cyan: #00d9ff;
+  --color-terminal-yellow: #ffbd2e;
+}
+
+:root {
+  /* Default to Dark (Mocha) */
+  --bg-primary: #1e1e2e;
+  --bg-secondary: #181825;
+  --bg-tertiary: #313244;
+  --text-primary: #cdd6f4;
+  --text-secondary: #a6adc8;
+  --accent: #89b4fa;
+  --border: #313244;
+  --session-text: #f5c2e7;
+  --at-text: #6c7086;
+  --domain-text: #89b4fa;
+}
+
+.light {
+  /* Light (Clean & Vibrant) */
+  --bg-primary: #ffffff;
+  /* Pure White */
+  --bg-secondary: #f3f4f6;
+  /* Cool Grey */
+  --bg-tertiary: #e5e7eb;
+  /* Light Grey */
+  --text-primary: #111827;
+  /* Near Black */
+  --text-secondary: #4b5563;
+  /* Grey */
+  --accent: #2563eb;
+  /* Vibrant Blue */
+  --border: #e5e7eb;
+  /* Light Grey */
+  --session-text: #db2777;
+  /* Pink */
+  --at-text: #6b7280;
+  /* Grey */
+  --domain-text: #2563eb;
+  /* Blue */
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Courier New', monospace;
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+/* Apply transitions to all elements that might change color */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+}
+
+/* Shake animation for invalid command feedback */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(-6px); }
+  20% { transform: translateX(6px); }
+  30% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  50% { transform: translateX(-2px); }
+  60% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.65s ease-in-out;
+}
