@@ -104,7 +104,7 @@ export default function Terminal() {
               <p>
                 echo "This domain:{' '}
                 <a
-                  href="https://dev.bergman.rocks"
+                  href="https://bergman.rocks"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#89b4fa] border-b border-dotted border-[#89b4fa] hover:text-[#a6e3a1] hover:border-[#a6e3a1] transition-colors"
