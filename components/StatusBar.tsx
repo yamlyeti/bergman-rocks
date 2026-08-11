@@ -20,7 +20,6 @@ export default function StatusBar() {
 
   const fullHint = 'Type : for options'
   const [typed, setTyped] = useState('')
-  const [done, setDone] = useState(false)
 
   useEffect(() => {
     const speed = 60 // ms per char
@@ -29,7 +28,6 @@ export default function StatusBar() {
         // If already complete, stop the timer
         if (prev.length >= fullHint.length) {
           clearInterval(timer)
-          setDone(true)
           return prev
         }
 

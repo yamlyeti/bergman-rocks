@@ -15,30 +15,28 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const [theme, setThemeState] = useState<Theme>('dark')
-    const [snowMode, setSnowModeState] = useState<SnowMode>('normal')
+function readInitialTheme(): Theme {
+    if (typeof window === 'undefined') return 'dark'
+    const savedTheme = localStorage.getItem('theme')
+    // Default to dark for this persona even if the system prefers light.
+    return savedTheme === 'light' ? 'light' : 'dark'
+}
 
-    useEffect(() => {
-        // Load saved theme or default to dark
-        const savedTheme = localStorage.getItem('theme') as Theme
-        if (savedTheme) {
-            setThemeState(savedTheme)
-        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-            // Optional: respect system preference, but default to dark for this persona
-            // setThemeState('light') 
-        }
-        // Load saved snow mode (default 'normal')
-        const savedMode = localStorage.getItem('snowMode')
-        if (savedMode === 'off' || savedMode === 'normal' || savedMode === 'blizzard') {
-            setSnowModeState(savedMode)
-        } else {
-            // backward compatibility: support old boolean 'snow'
-            const savedSnow = localStorage.getItem('snow')
-            if (savedSnow === 'false') setSnowModeState('off')
-            else if (savedSnow === 'true') setSnowModeState('normal')
-        }
-    }, [])
+function readInitialSnowMode(): SnowMode {
+    if (typeof window === 'undefined') return 'normal'
+    const savedMode = localStorage.getItem('snowMode')
+    if (savedMode === 'off' || savedMode === 'normal' || savedMode === 'blizzard') {
+        return savedMode
+    }
+    // backward compatibility: support old boolean 'snow'
+    const savedSnow = localStorage.getItem('snow')
+    if (savedSnow === 'false') return 'off'
+    return 'normal'
+}
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+    const [theme, setThemeState] = useState<Theme>(readInitialTheme)
+    const [snowMode, setSnowModeState] = useState<SnowMode>(readInitialSnowMode)
 
     useEffect(() => {
         // Apply theme class to html element

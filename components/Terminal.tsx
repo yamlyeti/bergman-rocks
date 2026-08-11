@@ -27,8 +27,8 @@ export default function Terminal() {
               </Link>
             </p>
             <div className="ml-5 text-[#cdd6f4] space-y-2">
-              <p>Hey, I'm Josh. I live in the terminal and neovim, automating infrastructure and making deployments rock solid.</p>
-              <p>When I'm not working on automating all the things, full stack orchestrating at its highest or writing YAML, you'll find me scaling mountains—both literal and metaphorical.</p>
+              <p>Hey, I&rsquo;m Josh. I live in the terminal and neovim, automating infrastructure and making deployments rock solid.</p>
+              <p>When I&rsquo;m not working on automating all the things, full stack orchestrating at its highest or writing YAML, you&rsquo;ll find me scaling mountains—both literal and metaphorical.</p>
             </div>
           </div>
 
@@ -69,7 +69,7 @@ export default function Terminal() {
             <div className="ml-5 text-[#cdd6f4] space-y-1">
               <p>#!/bin/bash</p>
               <p>
-                echo "Personal GitHubs:{' '}
+                echo &ldquo;Personal GitHubs:{' '}
                 <a
                   href="https://github.com/yamlyeti"
                   target="_blank"
@@ -78,7 +78,7 @@ export default function Terminal() {
                 >
                   @yamlyeti
                 </a>
-                " and "
+                &rdquo; and &ldquo;
                 <a
                   href="https://github.com/b3rgman"
                   target="_blank"
@@ -87,10 +87,10 @@ export default function Terminal() {
                 >
                   @b3rgman
                 </a>
-                "
+                &rdquo;
               </p>
               <p>
-                echo "Professional GitHub:{' '}
+                echo &ldquo;Professional GitHub:{' '}
                 <a
                   href="https://github.com/jbergman-oddball"
                   target="_blank"
@@ -99,10 +99,10 @@ export default function Terminal() {
                 >
                   @jbergman-oddball
                 </a>
-                "
+                &rdquo;
               </p>
               <p>
-                echo "This domain:{' '}
+                echo &ldquo;This domain:{' '}
                 <a
                   href="https://bergman.rocks"
                   target="_blank"
@@ -111,10 +111,10 @@ export default function Terminal() {
                 >
                   bergman.rocks
                 </a>
-                "
+                &rdquo;
               </p>
               <p>
-                echo "Also this domain:{' '}
+                echo &ldquo;Also this domain:{' '}
                 <a
                   href="https://joshbergman.io"
                   target="_blank"
@@ -123,10 +123,10 @@ export default function Terminal() {
                 >
                   joshbergman.io
                 </a>
-                "
+                &rdquo;
               </p>
               <p>
-                echo "Contact me:{' '}
+                echo &ldquo;Contact me:{' '}
                 <a
                   href="https://n8n.bergman.rocks/form/20e51a6a-4034-4aa3-af61-fcf0200fd404"
                   target="_blank"
@@ -135,7 +135,7 @@ export default function Terminal() {
                 >
                   Contact me
                 </a>
-                "
+                &rdquo;
               </p>
             </div>
           </div>

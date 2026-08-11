@@ -74,6 +74,8 @@ export default function CommandMode() {
           router.push('/')
           handled = true
         } else if (command === 'boot') {
+          // Full reload (not router.push) so the boot sequence replays.
+          // eslint-disable-next-line @next/next/no-location-assign-relative-destination
           window.location.href = '/'
           handled = true
         } else if (command === 'resume') {
@@ -102,7 +104,9 @@ export default function CommandMode() {
           setInvalidCommand(bad)
           // play terminal bell sound
           try {
-            const Ctx = (window.AudioContext || (window as any).webkitAudioContext)
+            const Ctx =
+              window.AudioContext ||
+              (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
             const ctx = new Ctx()
             const o = ctx.createOscillator()
             const g = ctx.createGain()
@@ -115,9 +119,9 @@ export default function CommandMode() {
             g.gain.exponentialRampToValueAtTime(0.05, ctx.currentTime + 0.01)
             g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.25)
             setTimeout(() => {
-              try { o.stop(); ctx.close() } catch (_) {}
+              try { o.stop(); ctx.close() } catch { /* already stopped */ }
             }, 300)
-          } catch (e) {
+          } catch {
             // ignore audio errors
           }
           // clear after a short animation
