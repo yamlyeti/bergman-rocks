@@ -1,91 +1,59 @@
-'use client'
-
 import Link from 'next/link'
-import TerminalWrapper from '@/components/TerminalWrapper'
-import StatusBar from '@/components/StatusBar'
-import CommandMode from '@/components/CommandMode'
+import SiteLayout from '@/components/SiteLayout'
 
 export default function TermsPage() {
   return (
-    <>
-      <main className="min-h-screen flex items-center justify-center p-5">
-        <TerminalWrapper>
-          <div className="p-8">
-            <div className="text-[#a6e3a1] mb-6">
-              <span className="text-[#89b4fa]">$</span> cat terms.md
-            </div>
+    <SiteLayout>
+      <div className="glass-panel">
+        <div className="glass-panel__body">
+          <p className="eyebrow">Legal</p>
+          <h1 className="gradient-heading">Terms and Conditions</h1>
+          <p className="lead">Terms and Conditions for SMS Services</p>
 
-            <div className="text-[#cdd6f4] space-y-6">
-              <h1 className="text-3xl text-[#fab387] mb-6">Terms and Conditions for SMS Services</h1>
-
-              <p className="text-[#a6adc8]">
-                By initiating a text message inquiry to our business number, you agree to the following Terms and Conditions:
+          <div className="content-grid" style={{ marginTop: '2rem' }}>
+            <div className="card">
+              <h2 className="card__title">1. Program Description</h2>
+              <p className="card__desc">
+                By opting in, you agree to receive SMS messages from Joshua Bergman Real Estate AI
+                regarding property inquiries, appointment reminders, and related real estate services.
               </p>
-
-              <div className="space-y-5">
-                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
-                  <h2 className="text-[#89b4fa] text-lg mb-2">1. Program Description</h2>
-                  <p className="text-sm text-[#a6adc8]">
-                    Joshua Bergman provides automated and manual responses to real estate inquiries, including property
-                    details, pricing, availability, and scheduling of showings.
-                  </p>
-                </div>
-
-                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
-                  <h2 className="text-[#89b4fa] text-lg mb-2">2. Message Frequency</h2>
-                  <p className="text-sm text-[#a6adc8]">
-                    Message frequency varies based on your inquiries. You will only receive messages in response to your
-                    requests or regarding properties you have expressed interest in.
-                  </p>
-                </div>
-
-                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
-                  <h2 className="text-[#89b4fa] text-lg mb-2">3. Cost</h2>
-                  <p className="text-sm text-[#a6adc8]">
-                    Message and data rates may apply. Check with your mobile carrier for details. Joshua Bergman does not
-                    charge a fee for this service.
-                  </p>
-                </div>
-
-                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
-                  <h2 className="text-[#89b4fa] text-lg mb-2">4. Opt-Out &amp; Support</h2>
-                  <p className="text-sm text-[#a6adc8] mb-2">
-                    <span className="text-[#cdd6f4] font-semibold">To Stop:</span> Reply{' '}
-                    <span className="text-[#a6e3a1] font-bold">STOP</span> to any message to be permanently
-                    unsubscribed. You will receive one final confirmation message.
-                  </p>
-                  <p className="text-sm text-[#a6adc8]">
-                    <span className="text-[#cdd6f4] font-semibold">For Help:</span> Reply{' '}
-                    <span className="text-[#a6e3a1] font-bold">HELP</span> for instructions or contact us at{' '}
-                    <a href="mailto:gokick@bergman.rocks" className="text-[#89b4fa] hover:text-[#a6e3a1] transition-colors">
-                      gokick@bergman.rocks
-                    </a>.
-                  </p>
-                </div>
-
-                <div className="bg-[#181825] p-4 border-l-2 border-[#f38ba8]">
-                  <h2 className="text-[#f38ba8] text-lg mb-2">5. Disclaimer</h2>
-                  <p className="text-sm text-[#a6adc8]">
-                    Automated AI responses are for informational purposes. While we strive for accuracy, please verify
-                    all property details with a licensed agent before making financial decisions.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-8 flex gap-6">
-                <Link href="/" className="text-[#89b4fa] hover:text-[#a6e3a1] transition-colors">
-                  ← Back to home
-                </Link>
-                <Link href="/policies" className="text-[#89b4fa] hover:text-[#a6e3a1] transition-colors">
-                  ← Privacy Policy
-                </Link>
-              </div>
+            </div>
+            <div className="card">
+              <h2 className="card__title">2. Message Frequency</h2>
+              <p className="card__desc">
+                Message frequency varies based on your interaction with our services. You may receive
+                periodic updates related to your inquiries.
+              </p>
+            </div>
+            <div className="card">
+              <h2 className="card__title">3. Cost</h2>
+              <p className="card__desc">
+                Standard message and data rates may apply. Contact your carrier for details.
+              </p>
+            </div>
+            <div className="card">
+              <h2 className="card__title">4. Opt-Out &amp; Support</h2>
+              <p className="card__desc">
+                To stop: reply <strong style={{ color: 'var(--gold-bright)' }}>STOP</strong> to any message.
+                For help: reply <strong style={{ color: 'var(--gold-bright)' }}>HELP</strong> or contact{' '}
+                <a href="mailto:gokick@bergman.rocks" className="contact-link">gokick@bergman.rocks</a>.
+              </p>
+            </div>
+            <div className="card" style={{ borderColor: 'rgba(239, 68, 68, 0.3)' }}>
+              <h2 className="card__title">5. Disclaimer</h2>
+              <p className="card__desc">
+                Messages are sent on an as-needed basis. We are not responsible for delayed or undelivered
+                messages due to carrier issues.
+              </p>
             </div>
           </div>
-        </TerminalWrapper>
-      </main>
-      <StatusBar />
-      <CommandMode />
-    </>
+
+          <div className="btn-row">
+            <Link href="/" className="link-back">← Home</Link>
+            <Link href="/policies" className="link-back">Privacy Policy →</Link>
+          </div>
+        </div>
+      </div>
+    </SiteLayout>
   )
 }

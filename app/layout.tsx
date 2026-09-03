@@ -3,8 +3,8 @@ import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 export const metadata: Metadata = {
-  title: 'bergman.rocks | DevOps Engineer | Full Stack Orchestrator',
-  description: 'DevOps Engineer | Full Stack Orchestrator | Terminal Dweller | Neovim Enthusiast',
+  title: 'bergman.rocks | Josh Bergman | DevOps Engineer',
+  description: 'DevOps Engineer · Platform & Cloud Infrastructure · bergman.rocks',
 }
 
 export default function RootLayout({

@@ -1,87 +1,73 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import Link from 'next/link'
-import TerminalWrapper from '@/components/TerminalWrapper'
-import StatusBar from '@/components/StatusBar'
-import CommandMode from '@/components/CommandMode'
+import SiteLayout from '@/components/SiteLayout'
+
+const projects = [
+  {
+    name: 'aurum.bergman.rocks',
+    url: 'https://aurum.bergman.rocks',
+    desc: 'Task management — refined daily driver with the Aurum design system.',
+    tags: ['React', 'TypeScript', 'Vite', 'Supabase'],
+  },
+  {
+    name: 'log.bergman.rocks',
+    url: 'https://log.bergman.rocks',
+    desc: 'Personal custody and incident logging with court-ready export.',
+    tags: ['React', 'Vite', 'Supabase', 'Tailwind'],
+  },
+  {
+    name: 'bergman.rocks',
+    url: 'https://bergman.rocks',
+    desc: 'This portfolio — professional presence for Josh Bergman.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind'],
+  },
+  {
+    name: 'ppoker.bergman.rocks',
+    url: 'https://ppoker.bergman.rocks',
+    desc: 'Planning poker for agile teams.',
+    tags: ['Node.js', 'Express', 'Socket.io'],
+  },
+  {
+    name: 'tk-dev.bergman.rocks',
+    url: 'https://tk-dev.bergman.rocks',
+    desc: 'Time keeping and tracking system.',
+    tags: ['React', 'TypeScript', 'Vite', 'Supabase'],
+  },
+]
 
 export default function ProjectsPage() {
   return (
-    <>
-      <main className="min-h-screen flex items-center justify-center p-5">
-        <TerminalWrapper>
-          {/* Content */}
-          <div className="p-8">
-            <div className="text-[#a6e3a1] mb-6">
-              <span className="text-[#89b4fa]">$</span> ls -la projects/
-            </div>
+    <SiteLayout>
+      <div className="glass-panel">
+        <div className="glass-panel__body">
+          <p className="eyebrow">Portfolio</p>
+          <h1 className="gradient-heading">Projects</h1>
+          <p className="lead">Applications and tools across the bergman.rocks domain.</p>
 
-            <div className="text-[#cdd6f4] space-y-6">
-              <h1 className="text-3xl text-[#fab387] mb-4">Projects</h1>
-
-              <div className="space-y-4">
-                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
-                  <h3 className="text-[#89b4fa] text-lg mb-2"><a href="https://bergman.rocks" target="_blank" rel="noopener noreferrer" className="hover:text-[#a6e3a1] transition-colors">bergman.rocks</a></h3>
-                  <p className="text-sm mb-2">Personal portfolio site with terminal-inspired design</p>
-                  <div className="flex gap-2 text-xs">
-                    <span className="bg-[#313244] px-2 py-1 rounded">Next.js</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">TypeScript</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">Tailwind</span>
-                  </div>
+          <div className="content-grid" style={{ marginTop: '2rem' }}>
+            {projects.map((project) => (
+              <article key={project.url} className="card">
+                <h3 className="card__title">
+                  <a href={project.url} target="_blank" rel="noopener noreferrer">
+                    {project.name}
+                  </a>
+                </h3>
+                <p className="card__desc">{project.desc}</p>
+                <div className="tag-row">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="tag">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
-                  <h3 className="text-[#89b4fa] text-lg mb-2"><a href="https://ppoker.bergman.rocks" target="_blank" rel="noopener noreferrer" className="hover:text-[#a6e3a1] transition-colors">ppoker.bergman.rocks</a></h3>
-                  <p className="text-sm mb-2">Planning Poker. But fun</p>
-                  <div className="flex gap-2 text-xs">
-                    <span className="bg-[#313244] px-2 py-1 rounded">Node.js</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">Express</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">Socket.io</span>
-                  </div>
-                </div>
-                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
-                  <h3 className="text-[#89b4fa] text-lg mb-2"><a href="https://aurum.bergman.rocks" target="_blank" rel="noopener noreferrer" className="hover:text-[#a6e3a1] transition-colors">aurum.bergman.rocks</a></h3>
-                  <p className="text-sm mb-2">Tasks, refined. My daily task driver.</p>
-                  <div className="flex gap-2 text-xs">
-                    <span className="bg-[#313244] px-2 py-1 rounded">React</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">TypeScript</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">Vite</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">Supabase</span>
-                  </div>
-                </div>
-                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
-                  <h3 className="text-[#89b4fa] text-lg mb-2"><a href="https://log.bergman.rocks" target="_blank" rel="noopener noreferrer" className="hover:text-[#a6e3a1] transition-colors">log.bergman.rocks</a></h3>
-                  <p className="text-sm mb-2">Personal logging system</p>
-                  <div className="flex gap-2 text-xs">
-                    <span className="bg-[#313244] px-2 py-1 rounded">React</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">Vite</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">Supabase</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">Tailwind</span>
-                  </div>
-                </div>
-                <div className="bg-[#181825] p-4 border-l-2 border-[#89b4fa]">
-                  <h3 className="text-[#89b4fa] text-lg mb-2"><a href="https://tk-dev.bergman.rocks" target="_blank" rel="noopener noreferrer" className="hover:text-[#a6e3a1] transition-colors">tk-dev.bergman.rocks</a></h3>
-                  <p className="text-sm mb-2">Time keeping system</p>
-                  <div className="flex gap-2 text-xs">
-                    <span className="bg-[#313244] px-2 py-1 rounded">React</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">TypeScript</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">Vite</span>
-                    <span className="bg-[#313244] px-2 py-1 rounded">Supabase</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8">
-                <Link href="/" className="text-[#89b4fa] hover:text-[#a6e3a1] transition-colors">
-                  ← Back to home
-                </Link>
-              </div>
-            </div>
+              </article>
+            ))}
           </div>
-        </TerminalWrapper>
-      </main>
-      <StatusBar />
-      <CommandMode />
-    </>
+
+          <Link href="/" className="link-back">
+            ← Back to home
+          </Link>
+        </div>
+      </div>
+    </SiteLayout>
   )
 }
