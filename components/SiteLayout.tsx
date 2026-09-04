@@ -14,6 +14,7 @@ const navItems = [
   { name: 'Projects', path: '/projects' },
   { name: 'Resume', path: '/resume' },
   { name: 'Skills', path: '/skills' },
+  { name: 'Contact', path: '/contact' },
 ]
 
 export default function SiteLayout({ children }: SiteLayoutProps) {
@@ -24,6 +25,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
     <div className="site">
       <div className="site-glow site-glow--left" aria-hidden />
       <div className="site-glow site-glow--right" aria-hidden />
+      <div className="site-glow site-glow--center" aria-hidden />
 
       <header className="site-header">
         <Link href="/" className="site-header__brand">

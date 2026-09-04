@@ -12,12 +12,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
     "framer-motion": "^12.23.25",
     "next": "^16.0.7",
+    "nodemailer": "^9.1.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-parallax-tilt": "^1.7.315",
@@ -26,6 +30,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.17",
     "@types/node": "^24.10.1",
+    "@types/nodemailer": "^8.0.1",
     "@types/react": "^19.2.7",
     "autoprefixer": "^10.4.22",
     "postcss": "^8.5.6",

@@ -21,10 +21,14 @@ const skillSections = [
   },
   {
     title: 'Security',
+    id: 'security',
     items: [
+      'AWS GovCloud ⭐⭐⭐⭐⭐',
+      'FedRAMP & NIST ⭐⭐⭐⭐',
       'Qualys ⭐⭐⭐⭐',
       'Vulnerability Remediation ⭐⭐⭐⭐',
-      'CIS ⭐⭐⭐',
+      'CIS Benchmarks ⭐⭐⭐',
+      'Security Hub ⭐⭐⭐⭐',
       'Kali Linux ⭐⭐',
     ],
   },
@@ -73,7 +77,7 @@ export default function SkillsPage() {
 
           <div className="content-grid" style={{ marginTop: '2rem' }}>
             {skillSections.map((section) => (
-              <section key={section.title}>
+              <section key={section.title} id={section.id} className="skill-section">
                 <h2 className="section-title">{section.title}</h2>
                 <div className="skill-grid">
                   {section.items.map((item) => (

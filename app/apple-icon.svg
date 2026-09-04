@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+  <defs>
+    <linearGradient id="gold" x1="40" y1="30" x2="140" y2="150" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f0d060"/>
+      <stop offset="0.5" stop-color="#d4af37"/>
+      <stop offset="1" stop-color="#c8960a"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="40" fill="#080807"/>
+  <rect x="2" y="2" width="176" height="176" rx="38" stroke="#2a2624" stroke-width="3"/>
+  <text
+    x="90"
+    y="122"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
+    font-size="96"
+    font-weight="800"
+    fill="url(#gold)"
+  >B</text>
+</svg>

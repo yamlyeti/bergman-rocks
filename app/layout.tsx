@@ -4,7 +4,7 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 
 export const metadata: Metadata = {
   title: 'bergman.rocks | Josh Bergman | DevOps Engineer',
-  description: 'DevOps Engineer · Platform & Cloud Infrastructure · bergman.rocks',
+  description: 'DevOps Engineer · Full Stack Orchestrator · Platform & Cloud Infrastructure · bergman.rocks',
 }
 
 export default function RootLayout({
