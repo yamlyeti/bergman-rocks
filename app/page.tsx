@@ -54,11 +54,14 @@ export default function HomePage() {
             <Link href="/resume" className="btn btn--primary">
               View Resume
             </Link>
-            <Link href="/contact" className="btn btn--ghost">
-              Contact
-            </Link>
             <Link href="/projects" className="btn btn--ghost">
               Projects
+            </Link>
+            <Link href="/skills" className="btn btn--ghost">
+              Skills
+            </Link>
+            <Link href="/contact" className="btn btn--ghost">
+              Contact
             </Link>
           </div>
         </div>

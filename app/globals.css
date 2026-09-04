@@ -596,18 +596,31 @@ body {
   margin-bottom: 0.35rem;
 }
 
-.timeline-item__role {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--gold-dark);
-}
-
 .timeline-item ul {
   margin: 0.5rem 0 0;
   padding-left: 1.1rem;
   color: var(--text-muted);
   line-height: 1.6;
   font-size: 0.92rem;
+}
+
+.resume-group-label {
+  margin: 1.15rem 0 0;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.resume-group-label:first-of-type {
+  margin-top: 0.75rem;
+}
+
+.timeline-item__role {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gold-dark);
 }
 
 .prose-muted {
@@ -945,6 +958,78 @@ body {
 
 .skill-section {
   scroll-margin-top: 1.5rem;
+}
+
+.skills-page .section-title {
+  margin-bottom: 0.85rem;
+  font-size: 1.05rem;
+  color: var(--gold-bright);
+}
+
+.skill-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--border-gold);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  box-shadow: 0 0 20px var(--gold-glow);
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.skill-row:last-child {
+  border-bottom: none;
+}
+
+.skill-row:hover {
+  background: var(--gold-tint-faint);
+}
+
+.skill-row__name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+.skill-row__level {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--gold-tint-faint);
+}
+
+.skill-row__level--expert {
+  color: var(--text-on-gold);
+  border-color: var(--gold);
+  background: linear-gradient(to right, var(--gold-bright), var(--gold-dark));
+  box-shadow: 0 0 12px var(--gold-glow);
+}
+
+.skill-row__level--advanced {
+  color: var(--gold-bright);
+  border-color: var(--border-gold);
+  background: var(--gold-tint);
+}
+
+.skill-row__level--proficient {
+  color: var(--gold-dark);
+  border-color: var(--border-gold);
 }
 
 .contact-tile__label {

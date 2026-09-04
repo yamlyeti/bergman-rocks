@@ -28,8 +28,52 @@ export default function ResumePage() {
               <ul>
                 <li>Maintaining and creating automation for VA Flagship Mobile Application</li>
                 <li>Maintaining iOS and Android builds for Mobile Application</li>
+                <li>
+                  Automated App Store screenshot generation for iOS and Android using Detox and
+                  simulators on GitHub Actions runners
+                </li>
                 <li>Tracking and monitoring alerts using DataDog</li>
-                <li>Building AWS infrastructure in GovCloud</li>
+              </ul>
+
+              <p className="resume-group-label">AWS GovCloud &amp; Security</p>
+              <ul>
+                <li>
+                  Incident Commander for VA production environments — led threat mitigation, root-cause
+                  analysis, and cross-team response while maintaining 99.9%+ availability under
+                  NIST/FedRAMP zero-trust controls
+                </li>
+                <li>
+                  Managed GovCloud root configurations, IAM policies, and SSM parameter stores to
+                  isolate federal workloads and support zero-downtime operations
+                </li>
+              </ul>
+
+              <p className="resume-group-label">CI/CD &amp; Infrastructure</p>
+              <ul>
+                <li>
+                  Led end-to-end migration of 5 mission-critical repositories to modern deployment
+                  targets; centralized secrets in AWS SSM and updated pipelines to consume them
+                </li>
+                <li>
+                  Reduced pipeline build times from 1.5 days to 30 minutes with automated runners and
+                  deployment scripts
+                </li>
+                <li>
+                  Managed EKS manifests, Helm charts, and containerized workflows in GovCloud for
+                  scalable, reliable cluster operations
+                </li>
+                <li>
+                  Beginning GitOps rollout with Argo CD — targeting EKS deployments for two small
+                  platform applications
+                </li>
+              </ul>
+
+              <p className="resume-group-label">Innovation</p>
+              <ul>
+                <li>
+                  Won internal engineering hackathon within first 6 months — delivered an automated
+                  tooling prototype to streamline platform operational workflows
+                </li>
               </ul>
             </div>
 
